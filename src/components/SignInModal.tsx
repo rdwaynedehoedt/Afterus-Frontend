@@ -33,7 +33,7 @@ export default function SignInModal({ isOpen, onClose }: SignInModalProps) {
     e.preventDefault();
     login(email, password);
     onClose();
-    router.push("/dashboard");
+    router.push("/journal/new");
   };
 
   if (!isOpen) return null;

@@ -15,7 +15,6 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
-  OAuthProvider,
   type User,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
@@ -27,7 +26,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
-  signInWithApple: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -58,11 +56,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await signInWithPopup(auth, provider);
   }, []);
 
-  const signInWithApple = useCallback(async () => {
-    const provider = new OAuthProvider("apple.com");
-    await signInWithPopup(auth, provider);
-  }, []);
-
   const logout = useCallback(async () => {
     await signOut(auth);
   }, []);
@@ -84,7 +77,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         signUp,
         signInWithGoogle,
-        signInWithApple,
         logout,
       }}
     >

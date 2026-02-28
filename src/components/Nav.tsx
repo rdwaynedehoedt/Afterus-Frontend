@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 function getNavLinks(isLoggedIn: boolean) {
   const base = [
     { href: "/", label: "Home" },
-    { href: "/journal", label: "Journal" },
+    { href: isLoggedIn ? "/journal/new" : "/journal", label: "Journal" },
   ];
   if (isLoggedIn) {
     return [...base, { href: "/dashboard", label: "My Profile" }];
@@ -45,7 +45,7 @@ export default function Nav() {
               key={link.label}
               href={link.href}
               className={`text-xs font-medium tracking-wide transition-colors sm:text-[13px] ${
-                pathname === link.href
+                pathname === link.href || (link.href.startsWith("/journal") && pathname.startsWith("/journal"))
                   ? "text-[var(--foreground)]"
                   : "text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}

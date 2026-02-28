@@ -34,10 +34,10 @@ Journal entry:
 ${content.slice(0, 8000)}
 """
 
-Return ONLY this format: {"state":"...","intensity":N,"briefInsight":"..."}`;
+Return ONLY this JSON, nothing else: {"state":"X","intensity":N,"briefInsight":"Y"}`;
 
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,30 +45,72 @@ Return ONLY this format: {"state":"...","intensity":N,"briefInsight":"..."}`;
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0.3,
-            maxOutputTokens: 150,
-            responseMimeType: "application/json",
+            maxOutputTokens: 256,
           },
         }),
       }
     );
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Gemini API error:", err);
-      return NextResponse.json({ error: "Mood analysis failed" }, { status: 500 });
-    }
-
     const data = (await res.json()) as {
       candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      error?: { message?: string };
     };
-    const text =
-      data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? "";
+
+    if (!res.ok) {
+      const errMsg = data.error?.message ?? (typeof data === "object" ? JSON.stringify(data) : "Unknown");
+      console.error("Gemini API error:", errMsg);
+      return NextResponse.json({ error: "Mood analysis failed", details: errMsg }, { status: 500 });
+    }
+
+    const parts = data.candidates?.[0]?.content?.parts ?? [];
+    let text = parts.map((p: { text?: string }) => p.text ?? "").join("").trim();
+    text = text
+      .replace(/^```json\s*/i, "")
+      .replace(/^```\s*/i, "")
+      .replace(/\s*```$/g, "")
+      .trim();
 
     let parsed: { state?: string; intensity?: number; briefInsight?: string };
     try {
       parsed = JSON.parse(text) as typeof parsed;
     } catch {
-      return NextResponse.json({ error: "Invalid response from AI" }, { status: 500 });
+      const match = text.match(/\{[\s\S]*\}/);
+      if (match) {
+        try {
+          parsed = JSON.parse(match[0]) as typeof parsed;
+        } catch {
+          const fixed = match[0].replace(/,(\s*[}\]])/g, "$1");
+          try {
+            parsed = JSON.parse(fixed) as typeof parsed;
+          } catch {
+            const stateMatch = match[0].match(/"state"\s*:\s*"([^"]+)"/);
+            const intensityMatch = match[0].match(/"intensity"\s*:\s*(\d+)/);
+            if (stateMatch && intensityMatch) {
+              parsed = {
+                state: stateMatch[1],
+                intensity: parseInt(intensityMatch[1], 10),
+                briefInsight: "",
+              };
+            } else {
+              console.error("Gemini parse failed, raw:", text.slice(0, 300));
+              return NextResponse.json({ error: "Invalid response from AI" }, { status: 500 });
+            }
+          }
+        }
+      } else {
+        const stateMatch = text.match(/"state"\s*:\s*"([^"]+)"/);
+        const intensityMatch = text.match(/"intensity"\s*:\s*(\d+)/);
+        if (stateMatch && intensityMatch) {
+          parsed = {
+            state: stateMatch[1],
+            intensity: parseInt(intensityMatch[1], 10),
+            briefInsight: "",
+          };
+        } else {
+          console.error("Gemini parse failed, raw:", text.slice(0, 300));
+          return NextResponse.json({ error: "Invalid response from AI" }, { status: 500 });
+        }
+      }
     }
 
     const state = VALID_STATES.includes(parsed.state ?? "")

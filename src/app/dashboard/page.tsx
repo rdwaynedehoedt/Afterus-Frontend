@@ -51,6 +51,12 @@ export default function DashboardPage() {
             </p>
             <div className="mt-3 flex items-center gap-4">
               <Link
+                href={user ? `/profile/${user.uid}` : "/profile/edit"}
+                className="text-sm font-medium text-[var(--accent)] hover:underline"
+              >
+                My blogs
+              </Link>
+              <Link
                 href="/profile/edit"
                 className="text-sm font-medium text-[var(--accent)] hover:underline"
               >

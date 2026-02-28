@@ -27,6 +27,7 @@ export interface JournalEntry {
   subtitle: string;
   content: string;
   createdAt: Date;
+  isPrivate?: boolean;
   mood?: MoodData;
 }
 
@@ -42,7 +43,8 @@ function getAuthorName(user: { displayName?: string | null; email?: string | nul
 export async function saveEntry(
   userId: string,
   authorName: string,
-  data: { title: string; subtitle: string; content: string }
+  data: { title: string; subtitle: string; content: string },
+  isPrivate = false
 ): Promise<string> {
   const entriesRef = collection(db, "entries");
   const docRef = await addDoc(entriesRef, {
@@ -51,6 +53,7 @@ export async function saveEntry(
     title: data.title,
     subtitle: data.subtitle,
     content: data.content,
+    isPrivate,
     createdAt: new Date(),
   });
   return docRef.id;
@@ -60,6 +63,7 @@ export async function getAllEntries(maxEntries = 50): Promise<JournalEntry[]> {
   const entriesRef = collection(db, "entries");
   const q = query(
     entriesRef,
+    where("isPrivate", "==", false),
     orderBy("createdAt", "desc"),
     limit(maxEntries)
   );
@@ -67,23 +71,38 @@ export async function getAllEntries(maxEntries = 50): Promise<JournalEntry[]> {
   return snapshot.docs.map((d) => docToEntry(d));
 }
 
-export async function getEntriesByUser(userId: string, maxEntries = 50): Promise<JournalEntry[]> {
+export async function getEntriesByUser(
+  userId: string,
+  maxEntries = 50,
+  options?: { includePrivateForUserId?: string }
+): Promise<JournalEntry[]> {
   const entriesRef = collection(db, "entries");
-  const q = query(
-    entriesRef,
-    where("userId", "==", userId),
-    orderBy("createdAt", "desc"),
-    limit(maxEntries)
-  );
+  const isOwnProfile = options?.includePrivateForUserId === userId;
+  const q = isOwnProfile
+    ? query(
+        entriesRef,
+        where("userId", "==", userId),
+        orderBy("createdAt", "desc"),
+        limit(maxEntries)
+      )
+    : query(
+        entriesRef,
+        where("userId", "==", userId),
+        where("isPrivate", "==", false),
+        orderBy("createdAt", "desc"),
+        limit(maxEntries)
+      );
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => docToEntry(d));
 }
 
-export async function getEntry(id: string): Promise<JournalEntry | null> {
+export async function getEntry(id: string, currentUserId?: string): Promise<JournalEntry | null> {
   const docRef = doc(db, "entries", id);
   const d = await getDoc(docRef);
   if (!d.exists()) return null;
-  return docToEntry(d);
+  const entry = docToEntry(d);
+  if (entry.isPrivate && entry.userId !== currentUserId) return null;
+  return entry;
 }
 
 export async function updateEntry(
@@ -135,6 +154,7 @@ function docToEntry(d: { id: string; data: () => Record<string, unknown> }): Jou
     subtitle: (data.subtitle as string) ?? "",
     content: (data.content as string) ?? "",
     createdAt: (data.createdAt as { toDate?: () => Date })?.toDate?.() ?? new Date(),
+    isPrivate: data.isPrivate === true,
     mood,
   };
 }

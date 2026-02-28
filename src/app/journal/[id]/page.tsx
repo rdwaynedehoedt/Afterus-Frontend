@@ -19,11 +19,11 @@ export default function EntryPage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    getEntry(id).then((e) => {
+    getEntry(id, user?.uid).then((e) => {
       setEntry(e);
       setLoading(false);
     });
-  }, [id]);
+  }, [id, user?.uid]);
 
   const isOwner = user && entry?.userId === user.uid;
 
@@ -107,7 +107,7 @@ export default function EntryPage() {
               {entry.subtitle}
             </p>
           )}
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href={`/profile/${entry.userId}`}
               className="font-medium text-[var(--accent)] hover:underline"
@@ -116,6 +116,11 @@ export default function EntryPage() {
             </Link>
             <span className="text-[var(--muted)]">·</span>
             <time className="text-sm text-[var(--muted)]">{dateStr}</time>
+            {entry.isPrivate && isOwner && (
+              <span className="rounded bg-[var(--surface-muted)] px-2 py-0.5 text-xs font-medium text-[var(--muted)]">
+                Private
+              </span>
+            )}
           </div>
 
           {entry.mood && isOwner && (

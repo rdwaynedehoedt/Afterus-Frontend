@@ -3,6 +3,7 @@ import { DM_Sans, Cormorant_Garamond, Caveat, Pacifico } from "next/font/google"
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Nav from "@/components/Nav";
+import BlogFloatingButtons from "@/components/BlogFloatingButtons";
 import ThemeScript from "@/components/ThemeScript";
 import "./globals.css";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <Nav />
+            <BlogFloatingButtons />
             <main className="min-h-screen pb-[calc(4.5rem+env(safe-area-inset-bottom))] sm:pb-14">{children}</main>
           </AuthProvider>
         </ThemeProvider>

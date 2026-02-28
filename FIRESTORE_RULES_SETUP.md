@@ -18,7 +18,7 @@ service cloud.firestore {
       allow delete: if false;
     }
     match /entries/{entryId} {
-      allow read: if true;
+      allow read: if resource.data.isPrivate != true || request.auth != null && request.auth.uid == resource.data.userId;
       allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
@@ -42,4 +42,8 @@ https://console.firebase.google.com/v1/r/project/afterus-5cf15/firestore/indexes
 4. Wait 1–2 minutes for the index to build
 5. Try the profile page again
 
-Or create manually: **Firestore Database** → **Indexes** → Add composite index on `entries` with `userId` (Ascending) and `createdAt` (Descending).
+Or create manually in **Firestore Database** → **Indexes**:
+- `entries`: `isPrivate` (Ascending), `createdAt` (Descending)
+- `entries`: `userId` (Ascending), `isPrivate` (Ascending), `createdAt` (Descending)
+
+**Note:** Existing entries without `isPrivate` won't appear in the public feed. Add `isPrivate: false` to them in Firestore Console if needed.

@@ -17,7 +17,7 @@ export default function NewEntryPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, isPrivate: boolean) => {
     e.preventDefault();
     if (!user) {
       setError("Please sign in to publish.");
@@ -28,7 +28,7 @@ export default function NewEntryPage() {
     try {
       const profile = await getProfile(user.uid);
       const authorName = profile?.username ?? user.displayName ?? user.email?.split("@")[0] ?? "Kyl";
-      const entryId = await saveEntry(user.uid, authorName, { title, subtitle, content });
+      const entryId = await saveEntry(user.uid, authorName, { title, subtitle, content }, isPrivate);
 
       if (content.trim().length >= 30) {
         try {
@@ -59,7 +59,7 @@ export default function NewEntryPage() {
   };
 
   return (
-    <div className="min-h-[calc(100dvh-7rem)] px-4 pb-28 sm:min-h-[calc(100vh-6rem)] sm:px-6 sm:pb-20">
+    <div className="min-h-[calc(100dvh-7rem)] px-4 pb-36 sm:min-h-[calc(100vh-6rem)] sm:px-6 sm:pb-28">
       <div className="mx-auto max-w-[680px] pt-8 sm:pt-12">
         {/* Minimal header */}
         <div className="mb-8 flex items-center justify-between">
@@ -75,7 +75,7 @@ export default function NewEntryPage() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          onSubmit={handleSubmit}
+          onSubmit={(e) => handleSubmit(e, false)}
           className="space-y-8"
         >
           {/* Title - Medium style */}
@@ -112,18 +112,26 @@ export default function NewEntryPage() {
             <p className="text-sm text-red-500">{error}</p>
           )}
 
-          {/* Actions */}
-          <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:gap-4">
+          {/* Actions — clear of nav, compact & cute */}
+          <div className="flex flex-col gap-2 pt-6 pb-8 sm:flex-row sm:flex-wrap sm:gap-3 sm:pt-8 sm:pb-4">
             <button
               type="submit"
               disabled={loading}
-              className="rounded-xl bg-[var(--cta-bg)] px-6 py-3.5 text-base font-semibold text-[var(--cta-text)] transition-all hover:opacity-90 disabled:opacity-70"
+              className="rounded-2xl bg-[var(--cta-bg)] px-4 py-2.5 text-sm font-semibold text-[var(--cta-text)] shadow-sm transition-all hover:opacity-90 hover:shadow disabled:opacity-70"
             >
               {loading ? "Publishing…" : "Publish"}
             </button>
+            <button
+              type="button"
+              disabled={loading}
+              onClick={(e) => { e.preventDefault(); handleSubmit(e as unknown as React.FormEvent, true); }}
+              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)] disabled:opacity-70"
+            >
+              {loading ? "Publishing…" : "Publish privately"}
+            </button>
             <Link
               href="/journal"
-              className="rounded-xl border border-[var(--border)] px-6 py-3.5 text-center text-base font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)]"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-center text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)]"
             >
               Cancel
             </Link>

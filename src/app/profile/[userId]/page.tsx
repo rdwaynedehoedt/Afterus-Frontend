@@ -22,12 +22,15 @@ export default function ProfilePage() {
   const isOwnProfile = user?.uid === userId;
 
   useEffect(() => {
-    Promise.all([getProfile(userId), getEntriesByUser(userId)]).then(([p, list]) => {
+    Promise.all([
+      getProfile(userId),
+      getEntriesByUser(userId, 50, { includePrivateForUserId: user?.uid }),
+    ]).then(([p, list]) => {
       setProfile(p);
       setEntries(list);
       setLoading(false);
     });
-  }, [userId]);
+  }, [userId, user?.uid]);
 
   const handleDeleteClick = (id: string) => setDeleteEntryId(id);
 
@@ -109,9 +112,16 @@ export default function ProfilePage() {
                     className="flex items-start justify-between gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-colors hover:border-[var(--accent)]/40"
                   >
                     <Link href={`/journal/${entry.id}`} className="min-w-0 flex-1">
-                      <h3 className="font-display text-lg font-medium text-[var(--foreground)] sm:text-xl">
-                        {entry.title || "Untitled"}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-display text-lg font-medium text-[var(--foreground)] sm:text-xl">
+                          {entry.title || "Untitled"}
+                        </h3>
+                        {entry.isPrivate && isOwnProfile && (
+                          <span className="rounded bg-[var(--surface-muted)] px-2 py-0.5 text-xs font-medium text-[var(--muted)]">
+                            Private
+                          </span>
+                        )}
+                      </div>
                       {entry.subtitle && (
                         <p className="mt-1 text-sm text-[var(--muted)] line-clamp-2">
                           {entry.subtitle}

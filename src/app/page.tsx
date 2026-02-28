@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useTheme } from "@/context/ThemeContext";
 import BlurText from "@/components/BlurText";
 import GradientText from "@/components/GradientText";
 import FloatingIcons from "@/components/FloatingIcons";
+import SectionFloatingIcons from "@/components/SectionFloatingIcons";
 import { JournalIcon, TrackIcon, ReadIcon } from "@/components/FeatureIcons";
 import Link from "next/link";
 
@@ -37,8 +39,13 @@ const features = [
   },
 ];
 
+const gradientColorsDark = ["#C9A0DC", "#F7CAC9", "#98D4BB", "#C9A0DC"];
+const gradientColorsLight = ["#7c3aed", "#c2410c", "#059669", "#7c3aed"];
+
 export default function HomePage() {
   const [showGradient, setShowGradient] = useState(false);
+  const { theme } = useTheme();
+  const gradientColors = theme === "light" ? gradientColorsLight : gradientColorsDark;
 
   return (
     <div className="relative min-h-screen bg-[var(--background)]">
@@ -60,7 +67,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <GradientText
-              colors={["#C9A0DC", "#F7CAC9", "#98D4BB", "#C9A0DC"]}
+              colors={gradientColors}
               animationSpeed={6}
               showBorder={false}
               className="text-lg font-semibold sm:text-xl md:text-2xl lg:text-[1.5rem]"
@@ -106,8 +113,10 @@ export default function HomePage() {
       </section>
 
       {/* Section — Why This Exists (left) + What It Does (right) */}
-      <section id="why-section" className="px-4 py-16 sm:px-6 sm:py-20">
-        <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
+      <section id="why-section" className="relative px-4 py-16 sm:px-6 sm:py-20">
+        <div className="relative mx-auto max-w-5xl">
+          <SectionFloatingIcons />
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left — Why This Exists */}
           <motion.div {...fadeUp} className="lg:sticky lg:top-24">
             <h2 className="mb-8 font-display text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted)] sm:text-base">
@@ -256,6 +265,7 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
         </div>
       </section>
 

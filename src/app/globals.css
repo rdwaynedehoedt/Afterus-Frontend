@@ -16,6 +16,7 @@
   --hero-icon-lavender: rgba(201, 160, 220, 0.85);
   --hero-icon-blush: rgba(247, 202, 201, 0.85);
   --hero-icon-mint: rgba(152, 212, 187, 0.85);
+  --hero-icon-blue: rgba(107, 143, 181, 0.85);
   --blob-opacity: 0.04;
 }
 
@@ -31,10 +32,12 @@
   --muted: #525252;
   --success: #16a34a;
   --navy: #000000;
-  --hero-icon: rgba(0, 0, 0, 0.55);
-  --hero-icon-lavender: rgba(100, 60, 140, 0.75);
-  --hero-icon-blush: rgba(140, 80, 80, 0.75);
-  --hero-icon-mint: rgba(50, 120, 80, 0.75);
+  /* Icons: plants=green, waves=blue, flowers=soft violet - visible on white */
+  --hero-icon: rgba(30, 41, 59, 0.6);
+  --hero-icon-lavender: #7c3aed;
+  --hero-icon-blush: #c2410c;
+  --hero-icon-mint: #059669;
+  --hero-icon-blue: #0284c7;
   --blob-opacity: 0.12;
 }
 

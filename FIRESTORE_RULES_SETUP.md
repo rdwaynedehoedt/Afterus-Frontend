@@ -1,5 +1,7 @@
 # Firestore Rules & Indexes Setup
 
+**If you see "Missing or insufficient permissions" when signing in**, your Firestore rules need to be updated. Follow the steps below.
+
 ## Rules (required)
 
 1. Go to [Firebase Console](https://console.firebase.google.com/) → **Afterus** → **Firestore Database** → **Rules**
@@ -25,6 +27,8 @@ service cloud.firestore {
 ```
 
 3. Click **Publish**
+
+Or deploy from the project root: `firebase deploy --only firestore:rules`
 
 ## Index (for profile page) — REQUIRED
 

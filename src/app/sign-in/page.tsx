@@ -38,8 +38,12 @@ export default function SignInPage() {
       await signInWithGoogle();
       const uid = auth.currentUser?.uid;
       if (uid) {
-        const profile = await getProfile(uid);
-        router.push(profile ? "/journal/new" : "/profile/setup");
+        try {
+          const profile = await getProfile(uid);
+          router.push(profile ? "/journal/new" : "/profile/setup");
+        } catch {
+          router.push("/journal/new");
+        }
       } else {
         router.push("/journal/new");
       }

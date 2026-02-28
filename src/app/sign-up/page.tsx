@@ -36,7 +36,7 @@ export default function SignUpPage() {
       if (uid) {
         router.push("/profile/setup");
       } else {
-        router.push("/journal/new");
+        router.push("/journal");
       }
     } catch (err) {
       setError(getAuthErrorMessage(err));
@@ -54,12 +54,12 @@ export default function SignUpPage() {
       if (uid) {
         try {
           const profile = await getProfile(uid);
-          router.push(profile ? "/journal/new" : "/profile/setup");
+          router.push(profile ? "/journal" : "/profile/setup");
         } catch {
-          router.push("/journal/new");
+          router.push("/journal");
         }
       } else {
-        router.push("/journal/new");
+        router.push("/journal");
       }
     } catch (err) {
       setError(getAuthErrorMessage(err));

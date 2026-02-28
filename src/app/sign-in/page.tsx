@@ -23,7 +23,7 @@ export default function SignInPage() {
     setLoading(true);
     try {
       await login(email, password);
-      router.push("/journal/new");
+      router.push("/journal");
     } catch (err) {
       setError(getAuthErrorMessage(err));
     } finally {
@@ -40,12 +40,12 @@ export default function SignInPage() {
       if (uid) {
         try {
           const profile = await getProfile(uid);
-          router.push(profile ? "/journal/new" : "/profile/setup");
+          router.push(profile ? "/journal" : "/profile/setup");
         } catch {
-          router.push("/journal/new");
+          router.push("/journal");
         }
       } else {
-        router.push("/journal/new");
+        router.push("/journal");
       }
     } catch (err) {
       setError(getAuthErrorMessage(err));

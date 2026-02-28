@@ -7,7 +7,6 @@ import { useAuth } from "@/context/AuthContext";
 import AuthGuard from "@/components/AuthGuard";
 import DashboardCard from "@/components/DashboardCard";
 import MoodChart from "@/components/MoodChart";
-import { JournalIcon, TrackIcon, ReadIcon } from "@/components/FeatureIcons";
 import { getProfile } from "@/lib/profile";
 
 function getFirstName(user: { displayName?: string | null; email?: string | null }): string {
@@ -21,27 +20,6 @@ function getFirstName(user: { displayName?: string | null; email?: string | null
   }
   return "there";
 }
-
-const dashboardLinks = [
-  {
-    href: "/journal/new",
-    icon: JournalIcon,
-    title: "Write blog",
-    desc: "Write what you can't say out loud.",
-  },
-  {
-    href: "/dashboard#mood",
-    icon: TrackIcon,
-    title: "Track mood",
-    desc: "Log how you're feeling each day.",
-  },
-  {
-    href: "/coming-soon",
-    icon: ReadIcon,
-    title: "Read",
-    desc: "Articles and reminders you're not alone.",
-  },
-];
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -57,54 +35,35 @@ export default function DashboardPage() {
   return (
     <AuthGuard>
       <div className="mx-auto max-w-4xl px-4 py-8 pb-24 sm:px-6 sm:py-12 sm:pb-14">
-        {/* Top — Hi + Your safe space */}
+        {/* Top — Hi + Your safe space + Write blog button (top right) */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-12"
+          className="mb-12 flex flex-wrap items-start justify-between gap-4"
         >
-          <h1 className="font-display text-2xl font-light tracking-tight text-[var(--foreground)] sm:text-3xl">
-            Hi, {greeting}.
-          </h1>
-          <p className="mt-1 font-display text-base text-[var(--muted)] sm:text-lg">
-            Your safe space.
-          </p>
-          <Link
-            href="/profile/edit"
-            className="mt-3 inline-block text-sm font-medium text-[var(--accent)] hover:underline"
-          >
-            Edit profile
-          </Link>
-        </motion.div>
-
-        {/* Quick actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-12 grid gap-4 sm:grid-cols-3"
-        >
-          {dashboardLinks.map((item) => {
-            const Icon = item.icon;
-            return (
+          <div>
+            <h1 className="font-display text-2xl font-light tracking-tight text-[var(--foreground)] sm:text-3xl">
+              Hi, {greeting}.
+            </h1>
+            <p className="mt-1 font-display text-base text-[var(--muted)] sm:text-lg">
+              Your safe space.
+            </p>
+            <div className="mt-3 flex items-center gap-4">
               <Link
-                key={item.title}
-                href={item.href}
-                className="group flex items-start gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-colors hover:border-[var(--accent)]/40"
+                href="/profile/edit"
+                className="text-sm font-medium text-[var(--accent)] hover:underline"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface-muted)]/50 text-[var(--muted)] transition-colors group-hover:text-[var(--accent)]">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <h3 className="font-display font-medium text-[var(--foreground)]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-0.5 text-sm text-[var(--muted)]">{item.desc}</p>
-                </div>
+                Edit profile
               </Link>
-            );
-          })}
+            </div>
+          </div>
+          <Link
+            href="/journal/new"
+            className="shrink-0 rounded-lg bg-[var(--cta-bg)] px-3 py-2 text-xs font-medium text-[var(--cta-text)] transition-all active:scale-[0.98] hover:opacity-90 sm:rounded-xl sm:px-4 sm:py-2.5 sm:text-sm"
+          >
+            Write blog
+          </Link>
         </motion.div>
 
         {/* Stats cards */}
@@ -131,13 +90,32 @@ export default function DashboardPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6"
+          className="mb-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6"
         >
           <h2 className="mb-6 font-display text-lg font-medium text-[var(--foreground)]">
             Mood over time
           </h2>
           <MoodChart />
         </motion.section>
+
+        {/* My blogs button — bottom */}
+        {user && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <Link
+              href={`/profile/${user.uid}`}
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-6 py-4 text-base font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)]/40 hover:bg-[var(--surface-muted)]"
+            >
+              My blogs
+            </Link>
+            <p className="mt-2 text-center text-xs text-[var(--muted)]">
+              View, edit, and delete what you wrote
+            </p>
+          </motion.div>
+        )}
       </div>
     </AuthGuard>
   );

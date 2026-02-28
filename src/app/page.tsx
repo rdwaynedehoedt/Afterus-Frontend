@@ -203,7 +203,8 @@ export default function HomePage() {
                 </motion.div>
               );
             })}
-            {/* Little notes at the end of timeline */}
+            {/* Little notes at the end of timeline - hidden on mobile */}
+            <div className="hidden md:block">
             {[
               {
                 icon: (
@@ -264,10 +265,47 @@ export default function HomePage() {
                 </p>
               </motion.div>
             ))}
+            </div>
           </div>
         </div>
         </div>
       </section>
+
+      {/* Closing section */}
+      <section className="relative px-4 py-20 sm:px-6 sm:py-24">
+        <motion.div
+          {...fadeUp}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <div className="font-display text-[1.75rem] leading-[1.8] text-[var(--foreground)] sm:text-[2.25rem] md:text-[2.5rem]">
+            You made it here. That already says something. Healing isn&apos;t loud. It&apos;s consistent. You don&apos;t have to fix everything today. Just take the next step.
+          </div>
+
+          <div className="mt-14 flex flex-col items-center gap-6">
+            <Link
+              href="/journal"
+              className="inline-flex items-center rounded-2xl bg-[var(--cta-bg)] px-10 py-4 text-lg font-semibold text-[var(--cta-text)] transition-all hover:opacity-90 hover:scale-[1.02]"
+            >
+              Begin Again
+            </Link>
+            <p className="text-base text-[var(--foreground)] sm:text-lg">
+              One day at a time.
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-4 py-12 sm:px-6">
+        <p className="flex items-center justify-center gap-2 text-center font-signature text-2xl font-medium text-[var(--foreground)] sm:text-3xl">
+          Made with love, grief, and growth
+          <span className="text-[var(--accent)]" aria-hidden>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="inline-block sm:w-7 sm:h-7">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </span>
+        </p>
+      </footer>
 
     </div>
   );

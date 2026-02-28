@@ -10,8 +10,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/coming-soon", label: "Journal" },
-  { href: "/coming-soon", label: "About" },
+  { href: "/journal", label: "Journal" },
 ];
 
 export default function Nav() {

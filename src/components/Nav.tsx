@@ -16,8 +16,8 @@ export default function Nav() {
   const router = useRouter();
   const { isLoggedIn, logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     router.push("/");
   };
 
@@ -55,12 +55,20 @@ export default function Nav() {
               Sign out
             </button>
           ) : (
-            <Link
-              href="/sign-in"
-              className="text-xs font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:text-[13px]"
-            >
-              Sign in
-            </Link>
+            <>
+              <Link
+                href="/sign-up"
+                className="text-xs font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:text-[13px]"
+              >
+                Sign up
+              </Link>
+              <Link
+                href="/sign-in"
+                className="text-xs font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:text-[13px]"
+              >
+                Sign in
+              </Link>
+            </>
           )}
           <span className="mx-0.5 h-3 w-px shrink-0 bg-[var(--border)] sm:mx-1" aria-hidden />
           <ThemeToggle compact />

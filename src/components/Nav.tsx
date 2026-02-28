@@ -10,7 +10,7 @@ import SignInModal from "./SignInModal";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/journal", label: "Journal" },
-  { href: "/about", label: "About" },
+  { href: "/Why", label: "Why After us" },
 ];
 
 export default function Nav() {

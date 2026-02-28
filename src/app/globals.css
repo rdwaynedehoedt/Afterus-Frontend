@@ -12,6 +12,7 @@
   --muted: #8b95a3;
   --success: #7d9d7a;
   --navy: #c8d4e0;
+  --hero-icon: rgba(200, 212, 224, 0.5);
 }
 
 /* Light theme - full white and clean */
@@ -26,6 +27,7 @@
   --muted: #737373;
   --success: #22c55e;
   --navy: #171717;
+  --hero-icon: rgba(0, 0, 0, 0.18);
 }
 
 @theme inline {

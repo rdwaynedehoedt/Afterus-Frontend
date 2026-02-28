@@ -16,14 +16,14 @@ const placeholderEntries = [
     title: "Rough night",
     date: "2025-02-27",
     preview:
-      "Had a dream about them. Woke up at 3am and couldn't fall back asleep. Reminded myself that healing isn't linear...",
+      "Had a dream Why them. Woke up at 3am and couldn't fall back asleep. Reminded myself that healing isn't linear...",
   },
   {
     id: "3",
     title: "Two weeks no contact",
     date: "2025-02-26",
     preview:
-      "Hit 14 days today. It's getting easier. Still think about them but the urge to reach out is weaker. Proud of myself...",
+      "Hit 14 days today. It's getting easier. Still think Why them but the urge to reach out is weaker. Proud of myself...",
   },
   {
     id: "4",

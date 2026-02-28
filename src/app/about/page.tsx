@@ -1,9 +1,9 @@
-function AboutContent() {
+function WhyContent() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-12">
       <div className="mb-12">
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--navy)] sm:text-3xl">
-          About After Us
+          Why After Us
         </h1>
         <p className="mt-2 text-[var(--muted)]">
           A space for healing and growth
@@ -72,6 +72,6 @@ function AboutContent() {
   );
 }
 
-export default function AboutPage() {
-  return <AboutContent />;
+export default function WhyPage() {
+  return <WhyContent />;
 }

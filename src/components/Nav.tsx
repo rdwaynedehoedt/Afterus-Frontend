@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { useAuth } from "@/context/AuthContext";
-import SignInModal from "./SignInModal";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -16,7 +14,6 @@ const navLinks = [
 export default function Nav() {
   const pathname = usePathname();
   const router = useRouter();
-  const [signInOpen, setSignInOpen] = useState(false);
   const { isLoggedIn, logout } = useAuth();
 
   const handleLogout = () => {
@@ -58,19 +55,17 @@ export default function Nav() {
               Sign out
             </button>
           ) : (
-            <button
-              onClick={() => setSignInOpen(true)}
+            <Link
+              href="/sign-in"
               className="text-xs font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:text-[13px]"
             >
               Sign in
-            </button>
+            </Link>
           )}
           <span className="mx-0.5 h-3 w-px shrink-0 bg-[var(--border)] sm:mx-1" aria-hidden />
           <ThemeToggle compact />
         </div>
       </motion.nav>
-
-      <SignInModal isOpen={signInOpen} onClose={() => setSignInOpen(false)} />
     </>
   );
 }

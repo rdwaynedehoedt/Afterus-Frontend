@@ -14,7 +14,7 @@ export default function ThemeScript() {
             if (theme === 'light' || theme === 'dark') {
               document.documentElement.setAttribute('data-theme', theme);
             } else {
-              document.documentElement.setAttribute('data-theme', 'dark');
+              document.documentElement.setAttribute('data-theme', 'light');
             }
           })();
         `,

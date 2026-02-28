@@ -297,7 +297,7 @@ export default function FloatingIcons() {
       {icons.map((item, i) => (
         <motion.div
           key={i}
-          className="absolute cursor-default scale-75 transition-all duration-300 sm:scale-90 md:scale-100"
+          className={`absolute cursor-default scale-[0.55] transition-all duration-300 sm:scale-90 md:scale-100 ${i >= 12 ? "hidden sm:block" : ""}`}
           style={{
             left: item.x,
             top: item.y,

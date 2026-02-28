@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${cormorant.variable} ${caveat.variable} ${pacifico.variable} antialiased`}>
         <ThemeScript />
         <ThemeProvider>

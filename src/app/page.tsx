@@ -69,10 +69,44 @@ export default function HomePage() {
             </GradientText>
           </motion.div>
         </div>
+
+        {/* Scroll down indicator */}
+        <motion.a
+          href="#why-section"
+          aria-label="Scroll down"
+          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[var(--muted)] transition-colors hover:text-[var(--foreground)]"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+            className="flex flex-col items-center gap-1"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-5 w-5"
+            >
+              <path d="M12 5v14M19 12l-7 7-7-7" />
+            </svg>
+          </motion.div>
+        </motion.a>
       </section>
 
       {/* Section — Why This Exists (left) + What It Does (right) */}
-      <section className="px-4 py-16 sm:px-6 sm:py-20">
+      <section id="why-section" className="px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left — Why This Exists */}
           <motion.div {...fadeUp} className="lg:sticky lg:top-24">
@@ -225,55 +259,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Section 3 — Healing Isn't Linear */}
-      <section className="border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20">
-        <div className="mx-auto max-w-xl">
-          <motion.h2
-            {...fadeUp}
-            className="mb-6 font-display text-xl font-light tracking-tight text-[var(--foreground)] sm:text-2xl"
-          >
-            Healing Isn&apos;t Linear
-          </motion.h2>
-          <motion.div
-            {...fadeUp}
-            className="space-y-4 font-display text-[1rem] leading-[1.8] text-[var(--muted)] sm:text-[1.05rem]"
-          >
-            <p>Some days you&apos;ll feel free. Some days you&apos;ll want to text. Both are part of it.</p>
-            <p>You&apos;re not going backwards. You&apos;re processing.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 4 — Closing + CTA */}
-      <section className="border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-24">
-        <div className="mx-auto max-w-xl text-center">
-          <motion.p
-            {...fadeUp}
-            className="mb-4 font-display text-lg italic text-[var(--foreground)] sm:text-xl"
-          >
-            It starts after us.
-          </motion.p>
-          <motion.p
-            {...fadeUp}
-            className="mb-12 font-display text-sm text-[var(--muted)]"
-          >
-            ~Dwayne dehoedt
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Link
-              href="/journal"
-              className="inline-block rounded-full border border-[var(--border)] bg-[var(--foreground)] px-8 py-3.5 text-sm font-medium text-[var(--background)] transition-colors hover:opacity-90"
-            >
-              Start journaling
-            </Link>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

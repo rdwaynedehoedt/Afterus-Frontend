@@ -9,8 +9,8 @@ import SignInModal from "./SignInModal";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/journal", label: "Journal" },
-  { href: "/Why", label: "Why After us" },
+  { href: "/coming-soon", label: "Journal" },
+  { href: "/coming-soon", label: "About" },
 ];
 
 export default function Nav() {
@@ -39,7 +39,7 @@ export default function Nav() {
         <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.label}
               href={link.href}
               className={`text-xs font-medium tracking-wide transition-colors sm:text-[13px] ${
                 pathname === link.href

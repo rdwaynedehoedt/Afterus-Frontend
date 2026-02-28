@@ -52,7 +52,7 @@ export default function HomePage() {
             animateBy="words"
             direction="top"
             onAnimationComplete={() => setShowGradient(true)}
-            className="font-display text-5xl font-light tracking-[0.02em] text-[var(--foreground)] sm:text-7xl md:text-8xl"
+            className="font-display text-5xl font-normal tracking-[0.02em] text-[var(--foreground)] sm:text-7xl md:text-8xl"
           />
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -63,7 +63,7 @@ export default function HomePage() {
               colors={["#C9A0DC", "#F7CAC9", "#98D4BB", "#C9A0DC"]}
               animationSpeed={6}
               showBorder={false}
-              className="text-lg font-medium sm:text-xl md:text-2xl lg:text-[1.5rem]"
+              className="text-lg font-semibold sm:text-xl md:text-2xl lg:text-[1.5rem]"
             >
               Turning endings into beginnings
             </GradientText>
@@ -110,10 +110,10 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Left — Why This Exists */}
           <motion.div {...fadeUp} className="lg:sticky lg:top-24">
-            <h2 className="mb-8 font-display text-sm font-medium uppercase tracking-[0.2em] text-[var(--muted)] sm:text-base">
+            <h2 className="mb-8 font-display text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted)] sm:text-base">
               Why This Exists
             </h2>
-            <div className="font-display space-y-6 text-[1.15rem] leading-[1.85] tracking-[0.01em] text-[var(--foreground)] sm:text-[1.25rem]">
+            <div className="font-display space-y-6 text-[1.15rem] font-medium leading-[1.85] tracking-[0.01em] text-[var(--foreground)] sm:text-[1.25rem]">
               <p>I didn&apos;t plan this.</p>
               <p>
                 After the breakup, I started writing a lot. Like… a lot. Some of it made sense. Some of it definitely didn&apos;t.
@@ -154,11 +154,11 @@ export default function HomePage() {
                     <span className="text-[var(--muted)]">
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </span>
-                    <span className="font-display text-xl font-medium text-[var(--foreground)] sm:text-2xl">
+                    <span className="font-display text-xl font-semibold text-[var(--foreground)] sm:text-2xl">
                       {item.title}
                     </span>
                   </div>
-                  <p className="text-[1.1rem] leading-[1.75] text-[var(--muted)] sm:text-[1.2rem]">
+                  <p className="text-[1.1rem] font-medium leading-[1.75] text-[var(--muted)] sm:text-[1.2rem]">
                     {item.desc}
                   </p>
                 </>
@@ -250,7 +250,7 @@ export default function HomePage() {
                     {note.icon}
                   </svg>
                 </span>
-                <p className="font-display text-base leading-relaxed text-[var(--muted)] sm:text-[1.1rem]">
+                <p className="font-display text-base font-medium leading-relaxed text-[var(--muted)] sm:text-[1.1rem]">
                   {note.text}
                 </p>
               </motion.div>

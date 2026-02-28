@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useAuth } from "@/context/AuthContext";
@@ -7,6 +8,7 @@ import AuthGuard from "@/components/AuthGuard";
 import DashboardCard from "@/components/DashboardCard";
 import MoodChart from "@/components/MoodChart";
 import { JournalIcon, TrackIcon, ReadIcon } from "@/components/FeatureIcons";
+import { getProfile } from "@/lib/profile";
 
 function getFirstName(user: { displayName?: string | null; email?: string | null }): string {
   if (user.displayName) {
@@ -43,6 +45,14 @@ const dashboardLinks = [
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const [profile, setProfile] = useState<{ username: string } | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    getProfile(user.uid).then((p) => setProfile(p));
+  }, [user]);
+
+  const greeting = profile?.username ?? (user ? getFirstName(user) : "there");
 
   return (
     <AuthGuard>
@@ -55,11 +65,17 @@ export default function DashboardPage() {
           className="mb-12"
         >
           <h1 className="font-display text-2xl font-light tracking-tight text-[var(--foreground)] sm:text-3xl">
-            Hi, {user ? getFirstName(user) : "there"}.
+            Hi, {greeting}.
           </h1>
           <p className="mt-1 font-display text-base text-[var(--muted)] sm:text-lg">
             Your safe space.
           </p>
+          <Link
+            href="/profile/edit"
+            className="mt-3 inline-block text-sm font-medium text-[var(--accent)] hover:underline"
+          >
+            Edit profile
+          </Link>
         </motion.div>
 
         {/* Quick actions */}

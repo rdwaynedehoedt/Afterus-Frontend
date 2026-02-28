@@ -145,6 +145,7 @@ export default function HomePage() {
                 And if you&apos;re going through something similar, I genuinely hope this helps you too. Even a little. Sometimes just seeing your progress written down makes it easier to believe you&apos;re healing.
               </p>
               <p>You&apos;re not alone in it.</p>
+              <p>~ Dwayne Dehoedt</p>
             </div>
           </motion.div>
 

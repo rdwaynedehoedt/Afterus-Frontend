@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 function getNavLinks(isLoggedIn: boolean) {
   const base = [
     { href: "/", label: "Home" },
-    { href: isLoggedIn ? "/journal/new" : "/journal", label: "Journal" },
+    { href: "/journal", label: "Journal" },
   ];
   if (isLoggedIn) {
     return [...base, { href: "/dashboard", label: "My Profile" }];

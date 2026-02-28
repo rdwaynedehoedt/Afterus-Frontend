@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { useAuth } from "@/context/AuthContext";
 import { saveEntry } from "@/lib/entries";
+import { getProfile } from "@/lib/profile";
 
 export default function NewEntryPage() {
   const [title, setTitle] = useState("");
@@ -25,10 +26,16 @@ export default function NewEntryPage() {
     setError("");
     setLoading(true);
     try {
-      await saveEntry(user.uid, { title, subtitle, content });
+      const profile = await getProfile(user.uid);
+      const authorName = profile?.username ?? user.displayName ?? user.email?.split("@")[0] ?? "Kyl";
+      await saveEntry(user.uid, authorName, { title, subtitle, content });
       router.push("/journal");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to save. Try again.");
+      const msg = err instanceof Error ? err.message : "Failed to save. Try again.";
+      const displayMsg = msg.toLowerCase().includes("permission")
+        ? "Firestore rules need updating. Go to Firebase Console → Firestore → Rules and paste the rules from firestore.rules, then Publish."
+        : msg;
+      setError(displayMsg);
     } finally {
       setLoading(false);
     }

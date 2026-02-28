@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { useAuth } from "@/context/AuthContext";
 import { getAuthErrorMessage } from "@/lib/authErrors";
+import { getProfile } from "@/lib/profile";
+import { auth } from "@/lib/firebase";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -34,7 +36,13 @@ export default function SignInPage() {
     setLoading(true);
     try {
       await signInWithGoogle();
-      router.push("/journal/new");
+      const uid = auth.currentUser?.uid;
+      if (uid) {
+        const profile = await getProfile(uid);
+        router.push(profile ? "/journal/new" : "/profile/setup");
+      } else {
+        router.push("/journal/new");
+      }
     } catch (err) {
       setError(getAuthErrorMessage(err));
     } finally {

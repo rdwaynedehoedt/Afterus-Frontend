@@ -2,19 +2,23 @@
 
 import { useTheme } from "@/context/ThemeContext";
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  compact?: boolean;
+}
+
+export default function ThemeToggle({ compact }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
       onClick={toggleTheme}
-      className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)]"
+      className={`flex items-center justify-center rounded-md text-[var(--muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] ${compact ? "h-7 w-7 -m-0.5" : "h-9 w-9"}`}
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
       title={theme === "dark" ? "Light mode" : "Dark mode"}
     >
       {theme === "dark" ? (
         <svg
-          className="h-5 w-5"
+          className={compact ? "h-3.5 w-3.5" : "h-5 w-5"}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -28,7 +32,7 @@ export default function ThemeToggle() {
         </svg>
       ) : (
         <svg
-          className="h-5 w-5"
+          className={compact ? "h-3.5 w-3.5" : "h-5 w-5"}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

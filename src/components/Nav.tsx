@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { useAuth } from "@/context/AuthContext";
 import SignInModal from "./SignInModal";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -36,7 +37,7 @@ export default function Nav() {
         }}
         className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 right-4 z-50 mx-auto max-w-md rounded-full border border-[var(--border)] bg-[var(--background)]/80 px-4 py-2.5 shadow-lg backdrop-blur-xl sm:bottom-6 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 sm:px-6 sm:py-3"
       >
-        <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -65,6 +66,8 @@ export default function Nav() {
               Sign in
             </button>
           )}
+          <span className="mx-0.5 h-3 w-px shrink-0 bg-[var(--border)] sm:mx-1" aria-hidden />
+          <ThemeToggle compact />
         </div>
       </motion.nav>
 

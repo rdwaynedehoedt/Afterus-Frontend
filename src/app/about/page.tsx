@@ -64,8 +64,8 @@ function WhyContent() {
 
       {/* Subtle accent */}
       <div
-        className="pointer-events-none fixed -left-20 bottom-20 h-48 w-48 rounded-full opacity-[0.04]"
-        style={{ background: "var(--accent)" }}
+        className="pointer-events-none fixed -left-20 bottom-20 h-48 w-48 rounded-full"
+        style={{ background: "var(--accent)", opacity: "var(--blob-opacity)" }}
         aria-hidden
       />
     </div>

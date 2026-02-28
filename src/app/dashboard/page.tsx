@@ -37,8 +37,8 @@ export default function DashboardPage() {
 
       {/* Subtle geometric accent */}
       <div
-        className="pointer-events-none fixed -right-20 -top-20 h-64 w-64 rounded-full opacity-[0.04]"
-        style={{ background: "var(--accent)" }}
+        className="pointer-events-none fixed -right-20 -top-20 h-64 w-64 rounded-full"
+        style={{ background: "var(--accent)", opacity: "var(--blob-opacity)" }}
         aria-hidden
       />
     </div>

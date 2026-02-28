@@ -52,7 +52,7 @@ export default function HomePage() {
             animateBy="words"
             direction="top"
             onAnimationComplete={() => setShowGradient(true)}
-            className="font-display text-5xl font-normal tracking-[0.02em] text-[var(--foreground)] sm:text-7xl md:text-8xl"
+            className="font-display text-5xl font-medium tracking-[0.02em] text-[var(--foreground)] sm:text-7xl md:text-8xl"
           />
           <motion.div
             initial={{ opacity: 0, y: 10 }}

@@ -80,10 +80,10 @@ const icons = [
   },
 ];
 
-const tintColors: Record<string, string> = {
-  lavender: "rgba(201, 160, 220, 0.7)",
-  blush: "rgba(247, 202, 201, 0.7)",
-  mint: "rgba(152, 212, 187, 0.7)",
+const tintVars: Record<string, string> = {
+  lavender: "var(--hero-icon-lavender)",
+  blush: "var(--hero-icon-blush)",
+  mint: "var(--hero-icon-mint)",
 };
 
 function IconSvg({
@@ -332,7 +332,7 @@ export default function FloatingIcons() {
             top: item.y,
             transform: `translate(-50%, -50%) rotate(${item.rotate}deg)`,
             pointerEvents: "auto",
-            color: item.tint ? tintColors[item.tint] : "var(--hero-icon)",
+            color: item.tint ? tintVars[item.tint] : "var(--hero-icon)",
           }}
           initial={false}
           animate={{
@@ -352,7 +352,7 @@ export default function FloatingIcons() {
               key={slotIcons[i]}
               className="inline-block"
               initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 0.5, scale: 1 }}
+              animate={{ opacity: 0.7, scale: 1 }}
               exit={{
                 opacity: 0,
                 scale: 0.6,

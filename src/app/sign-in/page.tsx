@@ -64,10 +64,10 @@ export default function SignInPage() {
         className="w-full max-w-sm"
       >
         <div className="mb-6 text-center sm:mb-10">
-          <h1 className="font-display text-2xl font-light tracking-tight text-[var(--foreground)] sm:text-4xl">
+          <h1 className="font-display text-2xl font-medium tracking-tight text-[var(--foreground)] sm:text-4xl">
             Sign in
           </h1>
-          <p className="mt-1.5 font-display text-sm text-[var(--muted)] sm:mt-2 sm:text-base">
+          <p className="mt-1.5 font-display text-sm font-medium text-[var(--muted)] sm:mt-2 sm:text-base">
             Welcome back.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function SignInPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1 block text-xs font-medium text-[var(--foreground)] sm:mb-1.5 sm:text-sm"
+              className="mb-1 block text-xs font-semibold text-[var(--foreground)] sm:mb-1.5 sm:text-sm"
             >
               Email
             </label>
@@ -87,13 +87,13 @@ export default function SignInPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3.5 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] sm:px-4 sm:py-3.5 sm:text-base"
+              className="w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3.5 py-3 text-sm font-medium text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] sm:px-4 sm:py-3.5 sm:text-base"
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="mb-1 block text-xs font-medium text-[var(--foreground)] sm:mb-1.5 sm:text-sm"
+              className="mb-1 block text-xs font-semibold text-[var(--foreground)] sm:mb-1.5 sm:text-sm"
             >
               Password
             </label>
@@ -104,7 +104,7 @@ export default function SignInPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3.5 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] sm:px-4 sm:py-3.5 sm:text-base"
+              className="w-full rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3.5 py-3 text-sm font-medium text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] sm:px-4 sm:py-3.5 sm:text-base"
             />
           </div>
           {error && (
@@ -120,13 +120,13 @@ export default function SignInPage() {
         </form>
 
         <div className="mt-6 flex flex-col items-center gap-3 sm:mt-8 sm:gap-4">
-          <p className="text-[11px] text-[var(--muted)] sm:text-xs">or continue with</p>
+          <p className="text-[11px] font-medium text-[var(--muted)] sm:text-xs">or continue with</p>
           <div className="flex w-full justify-center gap-2 sm:gap-3">
             <button
               type="button"
               disabled={loading}
               onClick={handleGoogleSignIn}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 text-[11px] font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)] disabled:opacity-70 sm:flex-initial sm:gap-2 sm:px-4 sm:py-2.5 sm:text-xs"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3 py-2.5 text-[11px] font-semibold text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)] disabled:opacity-70 sm:flex-initial sm:gap-2 sm:px-4 sm:py-2.5 sm:text-xs"
             >
               <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" viewBox="0 0 24 24">
                 <path
@@ -152,7 +152,7 @@ export default function SignInPage() {
               type="button"
               disabled={loading}
               onClick={handleAppleSignIn}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 text-[11px] font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)] disabled:opacity-70 sm:flex-initial sm:gap-2 sm:px-4 sm:py-2.5 sm:text-xs"
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[var(--input-border)] bg-[var(--input-bg)] px-3 py-2.5 text-[11px] font-semibold text-[var(--foreground)] transition-colors hover:bg-[var(--surface-muted)] disabled:opacity-70 sm:flex-initial sm:gap-2 sm:px-4 sm:py-2.5 sm:text-xs"
             >
               <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
@@ -162,16 +162,16 @@ export default function SignInPage() {
           </div>
         </div>
 
-        <p className="mt-4 text-center text-xs text-[var(--muted)] sm:mt-6">
+        <p className="mt-4 text-center text-xs font-medium text-[var(--muted)] sm:mt-6">
           Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="font-medium text-[var(--accent)] hover:underline">
+          <Link href="/sign-up" className="font-semibold text-[var(--accent)] hover:underline">
             Create account
           </Link>
         </p>
 
         <Link
           href="/"
-          className="mt-4 block text-center text-xs text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:mt-6 sm:text-sm"
+          className="mt-4 block text-center text-xs font-medium text-[var(--muted)] transition-colors hover:text-[var(--foreground)] sm:mt-6 sm:text-sm"
         >
           ← Back to home
         </Link>

@@ -28,7 +28,7 @@ export default function NewEntryModal({ isOpen, onClose }: NewEntryModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
@@ -36,11 +36,14 @@ export default function NewEntryModal({ isOpen, onClose }: NewEntryModalProps) {
         aria-hidden
       />
       <div
-        className="relative w-full max-w-lg max-h-[90dvh] overflow-y-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-xl sm:p-6"
+        className="relative w-full max-w-lg max-h-[85dvh] overflow-y-auto rounded-t-2xl border-t border-x border-[var(--border)] bg-[var(--surface)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-xl sm:rounded-xl sm:border sm:max-h-[90dvh] sm:p-6 sm:pb-6"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-[var(--foreground)]">
+        <div className="mb-4 flex justify-center sm:hidden">
+          <div className="h-1 w-12 rounded-full bg-[var(--border)]" aria-hidden />
+        </div>
+        <div className="mb-4 flex items-center justify-between sm:mb-6">
+          <h2 className="text-base font-semibold text-[var(--foreground)] sm:text-lg">
             New journal entry
           </h2>
           <button
@@ -107,9 +110,9 @@ export default function NewEntryModal({ isOpen, onClose }: NewEntryModalProps) {
             </label>
             <textarea
               id="entry-content"
-              rows={6}
+              rows={5}
               placeholder="Write your thoughts here..."
-              className="w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
+              className="min-h-[120px] w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--background)] px-3.5 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] sm:px-4"
             />
           </div>
 

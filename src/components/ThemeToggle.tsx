@@ -12,13 +12,13 @@ export default function ThemeToggle({ compact }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className={`flex items-center justify-center rounded-md text-[var(--muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] ${compact ? "h-7 w-7 -m-0.5" : "h-9 w-9"}`}
+      className={`flex items-center justify-center rounded-md text-[var(--muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--foreground)] ${compact ? "h-8 w-8 shrink-0" : "h-9 w-9"}`}
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
       title={theme === "dark" ? "Light mode" : "Dark mode"}
     >
       {theme === "dark" ? (
         <svg
-          className={compact ? "h-3.5 w-3.5" : "h-5 w-5"}
+          className={compact ? "h-4 w-4" : "h-5 w-5"}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -32,7 +32,7 @@ export default function ThemeToggle({ compact }: ThemeToggleProps) {
         </svg>
       ) : (
         <svg
-          className={compact ? "h-3.5 w-3.5" : "h-5 w-5"}
+          className={compact ? "h-4 w-4" : "h-5 w-5"}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

@@ -1,46 +1,44 @@
-import DashboardCard from "@/components/DashboardCard";
-import MoodChart from "@/components/MoodChart";
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import AuthGuard from "@/components/AuthGuard";
+import { motion } from "motion/react";
+
+function getFirstName(user: { displayName?: string | null; email?: string | null }): string {
+  if (user.displayName) {
+    const first = user.displayName.trim().split(/\s+/)[0];
+    if (first) return first;
+  }
+  if (user.email) {
+    const beforeAt = user.email.split("@")[0];
+    if (beforeAt) return beforeAt.charAt(0).toUpperCase() + beforeAt.slice(1).toLowerCase();
+  }
+  return "there";
+}
 
 export default function DashboardPage() {
+  const { user } = useAuth();
+
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-12">
-      <div className="mb-10">
-        <h1 className="text-2xl font-semibold tracking-tight text-[var(--navy)] sm:text-3xl">
-          Dashboard
-        </h1>
-        <p className="mt-1 text-sm text-[var(--muted)]">
-          Track your progress and how you&apos;re feeling
-        </p>
+    <AuthGuard>
+      <div className="flex min-h-[calc(100dvh-7rem)] flex-col items-center justify-center px-4 pb-24 sm:min-h-[calc(100vh-6rem)] sm:px-6 sm:pb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="w-full max-w-lg text-center"
+        >
+          <h1 className="font-display text-3xl font-medium tracking-tight text-[var(--foreground)] sm:text-4xl md:text-5xl">
+            My Profile
+          </h1>
+          <p className="mt-6 font-display text-xl font-medium text-[var(--foreground)] sm:text-2xl md:text-3xl">
+            Hi, {user ? getFirstName(user) : "there"}.
+          </p>
+          <p className="mt-4 text-base font-medium text-[var(--muted)] sm:text-lg">
+            Your safe space to reflect and grow.
+          </p>
+        </motion.div>
       </div>
-
-      {/* Dashboard cards grid */}
-      <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <DashboardCard title="Mood" value="7/10" subtitle="Today" />
-        <DashboardCard title="Urge to text" value="3/10" subtitle="Today" />
-        <DashboardCard title="Gym" value="Yes" subtitle="Completed" />
-        <DashboardCard title="Productive day" value="Yes" subtitle="Done" />
-        <DashboardCard
-          title="No Contact"
-          value="14 days"
-          subtitle="Keep going"
-          variant="streak"
-        />
-      </div>
-
-      {/* Mood progress chart */}
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6">
-        <h2 className="mb-6 text-lg font-semibold text-[var(--foreground)]">
-          Mood over time
-        </h2>
-        <MoodChart />
-      </div>
-
-      {/* Subtle geometric accent */}
-      <div
-        className="pointer-events-none fixed -right-20 -top-20 h-64 w-64 rounded-full"
-        style={{ background: "var(--accent)", opacity: "var(--blob-opacity)" }}
-        aria-hidden
-      />
-    </div>
+    </AuthGuard>
   );
 }

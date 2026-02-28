@@ -22,7 +22,7 @@ const placeholderData = [
 
 export default function MoodChart() {
   return (
-    <div className="h-64 min-h-[200px] w-full">
+    <div className="h-56 min-h-[180px] w-full sm:h-64 sm:min-h-[200px]">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={placeholderData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
           <CartesianGrid

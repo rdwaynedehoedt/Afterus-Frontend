@@ -55,7 +55,7 @@ function JournalContent() {
   });
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-12">
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--navy)] sm:text-3xl">
@@ -65,7 +65,7 @@ function JournalContent() {
             Your thoughts, one entry at a time
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <select
             value={sortOrder}
             onChange={(e) =>

@@ -3,7 +3,7 @@ import MoodChart from "@/components/MoodChart";
 
 export default function DashboardPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-12">
       <div className="mb-10">
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--navy)] sm:text-3xl">
           Dashboard
@@ -28,7 +28,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Mood progress chart */}
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
+      <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-6">
         <h2 className="mb-6 text-lg font-semibold text-[var(--foreground)]">
           Mood over time
         </h2>

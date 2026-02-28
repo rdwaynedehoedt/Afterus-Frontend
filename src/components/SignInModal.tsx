@@ -48,7 +48,7 @@ export default function SignInModal({ isOpen, onClose }: SignInModalProps) {
         aria-hidden
       />
       <div
-        className="relative w-full max-w-sm rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-xl"
+        className="relative w-full max-w-sm max-h-[90dvh] overflow-y-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-6 flex items-center justify-between">

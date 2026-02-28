@@ -23,6 +23,12 @@ export const metadata: Metadata = {
   description: "A minimalist, personal breakup recovery and growth journal.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,7 +41,7 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <Nav />
-            <main className="min-h-screen pb-14">{children}</main>
+            <main className="min-h-screen pb-[calc(4.5rem+env(safe-area-inset-bottom))] sm:pb-14">{children}</main>
           </AuthProvider>
         </ThemeProvider>
       </body>

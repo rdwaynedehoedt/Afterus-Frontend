@@ -13,7 +13,7 @@ export default function DashboardCard({
 }: DashboardCardProps) {
   return (
     <div
-      className={`rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-shadow hover:shadow-sm ${
+      className={`rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-shadow hover:shadow-sm sm:p-5 ${
         variant === "streak"
           ? "border-[var(--accent-soft)] bg-[var(--surface-muted)]"
           : ""

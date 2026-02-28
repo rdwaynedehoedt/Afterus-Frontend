@@ -9,8 +9,8 @@ export default function HomePage() {
   const [showGradient, setShowGradient] = useState(false);
 
   return (
-    <div className="relative flex min-h-[calc(100vh-3.5rem)] items-center justify-center overflow-hidden bg-[var(--background)]">
-      <div className="flex flex-col items-center gap-8">
+    <div className="relative flex min-h-[calc(100vh-3.5rem)] items-center justify-center overflow-hidden bg-[var(--background)] px-4 sm:px-6">
+      <div className="flex flex-col items-center gap-6 sm:gap-8">
         <BlurText
           text="After Us"
           delay={150}
@@ -28,7 +28,7 @@ export default function HomePage() {
             colors={["#C9A0DC", "#F7CAC9", "#98D4BB", "#C9A0DC"]}
             animationSpeed={6}
             showBorder={false}
-            className="text-lg font-medium sm:text-xl md:text-2xl"
+            className="text-base font-medium sm:text-xl md:text-2xl"
           >
             Turning endings into beginnings
           </GradientText>

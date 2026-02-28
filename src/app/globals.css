@@ -12,10 +12,10 @@
   --muted: #8b95a3;
   --success: #7d9d7a;
   --navy: #c8d4e0;
-  --hero-icon: rgba(200, 212, 224, 0.5);
-  --hero-icon-lavender: rgba(201, 160, 220, 0.7);
-  --hero-icon-blush: rgba(247, 202, 201, 0.7);
-  --hero-icon-mint: rgba(152, 212, 187, 0.7);
+  --hero-icon: rgba(220, 228, 240, 0.65);
+  --hero-icon-lavender: rgba(201, 160, 220, 0.85);
+  --hero-icon-blush: rgba(247, 202, 201, 0.85);
+  --hero-icon-mint: rgba(152, 212, 187, 0.85);
   --blob-opacity: 0.04;
 }
 
@@ -31,10 +31,10 @@
   --muted: #525252;
   --success: #16a34a;
   --navy: #000000;
-  --hero-icon: rgba(0, 0, 0, 0.45);
-  --hero-icon-lavender: rgba(140, 100, 180, 0.65);
-  --hero-icon-blush: rgba(200, 140, 140, 0.65);
-  --hero-icon-mint: rgba(80, 160, 120, 0.65);
+  --hero-icon: rgba(0, 0, 0, 0.55);
+  --hero-icon-lavender: rgba(100, 60, 140, 0.75);
+  --hero-icon-blush: rgba(140, 80, 80, 0.75);
+  --hero-icon-mint: rgba(50, 120, 80, 0.75);
   --blob-opacity: 0.12;
 }
 

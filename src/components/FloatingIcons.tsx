@@ -322,7 +322,7 @@ export default function FloatingIcons() {
               key={slotIcons[i]}
               className="inline-block"
               initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 0.7, scale: 1 }}
+              animate={{ opacity: 0.85, scale: 1 }}
               exit={{
                 opacity: 0,
                 scale: 0.6,
